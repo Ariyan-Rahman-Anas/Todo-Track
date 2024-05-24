@@ -15,7 +15,14 @@ const TheTodo = () => {
         }
        
     }
-    // console.log(items);
+
+    //deleting an items from the todo
+    const deleteATodoItem = (id) => {
+        const remainingItems = items.filter((item, ind) => {
+          return ind !== id;
+        });
+        setItems(remainingItems)
+    }
 
   return (
     <div className="h-full w-full flex items-center justify-center bg-gray-800 text-gray-300 ">
@@ -44,6 +51,8 @@ const TheTodo = () => {
           </div>
         </div>
 
+              <p>{items.length}</p>
+              
         <div className="showing-Items">
           {items?.map((item, index) => {
             return (
@@ -53,11 +62,8 @@ const TheTodo = () => {
               >
                 <h1 className="text-start">{item}</h1>
                 <div className="flex items-center gap-6">
-                  <CiEdit title="Edit Task" className="text-xl"></CiEdit>
-                  <MdOutlineDelete
-                    title="Delete Task"
-                    className="text-xl"
-                  ></MdOutlineDelete>
+                  <CiEdit title="Edit Task" className="text-xl cursor-pointer "></CiEdit>
+                  <MdOutlineDelete title="Delete Task" onClick={()=>deleteATodoItem(index)} className="text-xl cursor-pointer "></MdOutlineDelete>
                 </div>
               </div>
             );
